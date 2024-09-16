@@ -3,202 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shymaa Ali Fathi Ali - CV and Uranium-235 Atom Model</title>
+    <title>Shymaa Ali Fathi Ali - Interactive CV</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
     <style>
-        @font-face {
-            font-family: 'SUSE';
-            src: url('https://assets.suse.com/fonts/SUSESans.woff2') format('woff2'),
-                 url('https://assets.suse.com/fonts/SUSESans.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inria Sans', sans-serif;
-            background: #0a0a2a; /* Dark night sky */
-            color: #fff;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            margin-bottom: 2rem;
-            color: #fff;
-        }
-
-        .scene {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-            opacity: 0.3; /* Reduce overall scene opacity */
-        }
-
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-            opacity: 0.5; /* Reduce star opacity */
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.2; }
-        }
-
-        /* Updated Pyramid Styles */
-        #pyramid1, #pyramid2, #pyramid3 {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 200px solid transparent;
-            border-right: 200px solid transparent;
-            border-bottom: 300px solid rgba(0, 96, 100, 0.3); /* Pyramid colors */
-            bottom: 100px;
-            left: 65%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-        #pyramid2 {
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-bottom: 225px solid rgba(128, 128, 128, 0.3);
-            left: 50%;
-            z-index: 2;
-        }
-        #pyramid3 {
-            border-left: 100px solid transparent;
-            border-right: 100px solid transparent;
-            border-bottom: 150px solid rgba(192, 192, 192, 0.3);
-            left: 35%;
-            z-index: 3;
-        }
-        .ground {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, rgba(222, 184, 135, 0.3), rgba(244, 164, 96, 0.3)); /* Ground colors */
-        }
-
-        h1, h2 {
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .intro {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .intro h1 {
-            font-family: 'SUSE', sans-serif;
-            font-size: 4rem;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .typed-text {
-            font-family: 'Roboto Mono', monospace;
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            height: 3rem;
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-
-        .section {
-            margin-bottom: 2rem;
-            position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 3rem;
-            border-radius: 10px;
-        }
-
-        .experience-item, .education-item {
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            .intro h1 {
-                font-size: 3rem;
-            }
-            .typed-text {
-                font-size: 1.2rem;
-            }
-        }
-
-        /* Styles for Atom Model */
-        .atom-model {
-            position: absolute;
-            top: 25%;
-            right: 20%;
-            transform: translate(-50%, -50%);
-        }
-
-        .nucleus {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .proton {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: #1a1a3a; /* Dark shade close to the background color */
-            border-radius: 50%;
-        }
-
-        .electron {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #1a1a3a; /* Dark shade close to the background color */
-            border-radius: 50%;
-        }
-
-        @keyframes orbit {
-            0% { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
-        }
+        @font-face {font-family: 'SUSE';src: url('https://assets.suse.com/fonts/SUSESans.woff2') format('woff2'),url('https://assets.suse.com/fonts/SUSESans.woff') format('woff');font-weight: normal;font-style: normal;}
+        :root {--primary-color: #0a0a2a;--secondary-color: #ffffff;--accent-color: #ffffff;--text-color: #f5f5f7;--background-color: #0a0a2a;--petroleum-green: #004c4c;}
+        * {margin: 0;padding: 0;box-sizing: border-box;}
+        body {font-family: 'Inter', sans-serif;background: var(--background-color);color: var(--text-color);min-height: 100vh;overflow-x: hidden;line-height: 1.6;}
+        .container {max-width: 1200px;margin: 0 auto;padding: 2rem;position: relative;z-index: 2;}
+        .glassmorphism {background: rgba(255, 255, 255, 0.1);backdrop-filter: blur(10px);border-radius: 20px;padding: 2rem;margin-bottom: 2rem;animation: popup 0.5s ease;transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;}
+        .glassmorphism:hover {transform: scale(1.02);box-shadow: 0 0 10px 2px rgba(0, 76, 76, 0.3);background-color: rgba(0, 76, 76, 0.15);}
+        .section h2 {transition: color 0.3s ease;}
+        .glassmorphism:hover h2, .glassmorphism:hover h2::after {color: var(--petroleum-green);}
+        .section h2::after {content: '';position: absolute;left: 0;bottom: -0.5rem;width: 50px;height: 3px;background-color: var(--accent-color);transition: background-color 0.3s ease;}
+        .section:hover h2::after {background-color: var(--petroleum-green);}
+        @keyframes popup {from {transform: scale(0.95);opacity: 0;}to {transform: scale(1);opacity: 1;}}
+        .scene {position: fixed;top: 0;left: 0;width: 100%;height: 100%;overflow: hidden;z-index: 1;opacity: 0.3;}
+        .star {position: absolute;background: #fff;border-radius: 50%;animation: twinkle 3s infinite;opacity: 0.5;}
+        @keyframes twinkle {0%, 100% {opacity: 0.5;}50% {opacity: 0.2;}}
+        #pyramid1, #pyramid2, #pyramid3 {position: absolute;width: 0;height: 0;border-left: 200px solid transparent;border-right: 200px solid transparent;border-bottom: 300px solid rgba(0, 96, 100, 0.3);bottom: 100px;left: 65%;transform: translateX(-50%);z-index: 1;}
+        #pyramid2 {border-left: 150px solid transparent;border-right: 150px solid transparent;border-bottom: 225px solid rgba(128, 128, 128, 0.3);left: 50%;z-index: 2;}
+        #pyramid3 {border-left: 100px solid transparent;border-right: 100px solid transparent;border-bottom: 150px solid rgba(192, 192, 192, 0.3);left: 35%;z-index: 3;}
+        .ground {position: absolute;bottom: 0;left: 0;width: 100%;height: 100px;background: linear-gradient(to top, rgba(222, 184, 135, 0.3), rgba(244, 164, 96, 0.3));}
+        h1, h2 {margin-bottom: 1rem;color: var(--secondary-color);}
+        .intro {height: 100vh;display: flex;flex-direction: column;justify-content: center;align-items: center;text-align: center;}
+        .intro h1 {font-family: 'SUSE', sans-serif;font-size: 4rem;text-shadow: 2px 2px 4px rgba(0,0,0,0.5);}
+        .intro .highlight {font-family: 'Playwrite HU', sans-serif;font-weight: 400;background: linear-gradient(270deg, #004c4c, #00ff7f, #ff1493, #1e90ff);background-size: 800% 800%;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: gradient-animation 8s ease infinite;}
+        @keyframes gradient-animation {0% {background-position: 0% 50%;}50% {background-position: 100% 50%;}100% {background-position: 0% 50%;}}
+        .typed-text {font-family: 'Roboto Mono', monospace;font-size: 1.5rem;margin-top: 1rem;height: 3rem;text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
+        .content {display: flex;flex-wrap: wrap;margin-top: 2rem;}
+        .column {flex: 1;padding: 0 1rem;min-width: 300px;}
+        .section {margin-bottom: 2rem;position: relative;}
+        .section h2 {color: var(--accent-color);margin-bottom: 1.5rem;font-size: 1.5rem;position: relative;}
+        .item {margin-bottom: 1.5rem;}
+        .item h3 {color: var(--secondary-color);margin-bottom: 0.5rem;}
+        ul {list-style-type: none;padding-left: 1rem;}
+        ul li::before {content: '•';color: var(--accent-color);display: inline-block;width: 1em;margin-left: -1em;}
+        .atom-model {position: absolute;top: 10%;left: 10%;transform: translate(-50%, -50%);z-index: 3;}
+        .nucleus {position: relative;width: 100px;height: 100px;border-radius: 50%;display: flex;justify-content: center;align-items: center;}
+        .proton {position: absolute;width: 5px;height: 5px;background-color: var(--petroleum-green);border-radius: 50%;}
+        .electron {position: absolute;width: 10px;height: 10px;background-color: #4a4e69;border-radius: 50%;}
+        @keyframes orbit {0% {transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg);}100% {transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg);}}
+        @media (max-width: 768px) {.container {padding: 1rem;}.intro h1 {font-size: 3rem;}.typed-text {font-size: 1.2rem;}.column {flex: 100%;}.atom-model {display: none;}}
     </style>
 </head>
 <body>
@@ -208,293 +56,56 @@
         <div class="pyramid" id="pyramid3"></div>
         <div class="ground"></div>
     </div>
-
     <div class="container">
         <section class="intro">
-            <h1>I am Shymaa</h1>
+            <div class="atom-model"><div class="nucleus" id="nucleus"></div></div>
+            <h1>I am <span class="highlight">Shymaa</span></h1>
             <div class="typed-text" id="typed-text"></div>
         </section>
-
-        <section class="profile section">
-            <h2>Profile</h2>
-            <p>M.Sc. Candidate in Nuclear Application at Aachen University of Applied Sciences</p>
-            <p>Student Assistant at Aachen University of Applied Sciences, Department of Chemistry & Biotechnology</p>
-        </section>
-
-        <section class="education section">
-            <h2>Education</h2>
-            <div class="education-item">
-                <h3>M.Sc. Candidate</h3>
-                <p>Aachen University of Applied Sciences, Jülich, Germany</p>
-                <p>Nuclear Applications</p>
-                <p>Geopolymers Applications in Nuclear Waste Management</p>
-                <p>Synthesizing geopolymers and characterizing their properties</p>
-                <p>GPA: 3.4 (German Grade: 1.9)</p>
-                <p>2022/03 - present</p>
+        <div class="content">
+            <div class="column">
+                <section class="profile section glassmorphism"><h2>Profile</h2><p>M.Sc. Candidate in Nuclear Application at Aachen University of Applied Sciences</p><p>Student Assistant at Aachen University of Applied Sciences, Department of Chemistry & Biotechnology</p></section>
+                <section class="education section glassmorphism"><h2>Education</h2>
+                    <div class="item"><h3>M.Sc. Candidate</h3><p>Aachen University of Applied Sciences, Jülich, Germany</p><p>Nuclear Applications</p><p>GPA: 3.4 (German Grade: 1.9)</p><p>2022/03 - present</p></div>
+                    <div class="item"><h3>Specialized Diploma in Nuclear Power Plants</h3><p>Alexandria University, Alexandria, Egypt</p><p>GPA: 3.45</p><p>2013/09 - 2015/06</p></div>
+                    <div class="item"><h3>B.S. in Nuclear and Radiation Engineering</h3><p>Alexandria University, Alexandria, Egypt</p><p>2007/09 - 2013/06</p></div>
+                </section>
+                <section class="experience section glassmorphism"><h2>Work Experience</h2>
+                    <div class="item"><h3>Student Assistant</h3><p>Aachen University of Applied Sciences, Jülich, Germany</p><p>2023/03 - 2024/08</p><ul><li>Provided comprehensive academic and administrative support</li><li>Fostered a collaborative learning environment</li><li>Organized international conference on nuclear graphite</li></ul></div>
+                    <div class="item"><h3>Teaching Assistant and Lab Engineer</h3><p>Alexandria University, Alexandria, Egypt</p><p>2013/09 - 2015/06</p><ul><li>Developed laboratory assessment checklists and manuals</li><li>Tutored various Nuclear Engineering lab courses</li></ul></div>
+                </section>
             </div>
-            <div class="education-item">
-                <h3>Specialized Diploma in Nuclear Power Plants</h3>
-                <p>Alexandria University, Alexandria, Egypt</p>
-                <p>Postgraduate Program</p>
-                <p>Graduation Project: Literature Review on the Lithium Blanket for Fusion Reactors</p>
-                <p>GPA: 3.45</p>
-                <p>2013/09 - 2015/06</p>
+            <div class="column">
+                <section class="skills section glassmorphism"><h2>Programming Skills</h2><ul><li>Python</li><li>MCNP</li><li>FORTRAN</li><li>MATLAB</li><li>PLC & SCADA</li></ul></section>
+                <section class="languages section glassmorphism"><h2>Languages</h2><ul><li>Arabic: Native</li><li>English: Fluent</li><li>German: Intermediate</li></ul></section>
+                <section class="training section glassmorphism"><h2>Training and Internships</h2>
+                    <div class="item"><h3>Intern</h3><p>SCK•CEN Nuclear Research Center, Mol, Belgium</p><p>2024/03 - 2024/07</p></div>
+                    <div class="item"><h3>Participant</h3><p>International Atomic Energy Agency, Vienna, Austria</p><p>2023/11</p></div>
+                </section>
+                <section class="volunteering section glassmorphism"><h2>Volunteering Work</h2>
+                    <div class="item"><h3>Presenter and Events Organizer</h3><p>Bibliotheca of Alexandria, Egypt</p><p>2009/09 - 2015/09</p></div>
+                    <div class="item"><h3>Active Member</h3><p>Resala Charity Organization, Alexandria, Egypt</p><p>2007/09 - 2014/09</p></div>
+                </section>
+                <section class="publications section glassmorphism"><h2>Ongoing Publication</h2><p>Research paper on synthesis of geopolymers as barrier materials</p></section>
+                <section class="awards section glassmorphism"><h2>Grants and Awards</h2>
+                    <div class="item"><h3>Partial Scholarship for Internationalization Project</h3><p>Aachen University of Applied Sciences, Germany</p><p>2023/09 - 2024/02</p></div>
+                    <div class="item"><h3>Award of Prof. El-Maghrabi for Excellence in Research</h3><p>Alexandria University, Egypt</p><p>2011/01</p></div>
+                </section>
             </div>
-            <div class="education-item">
-                <h3>B.S. in Nuclear and Radiation Engineering</h3>
-                <p>Alexandria University, Alexandria, Egypt</p>
-                <p>Graduation Project: Supervision and Control of the PZR using SCADA and PLC</p>
-                <p>Mini Project: Environmental Impact Assessment for Nuclear Power Plants</p>
-                <p>2007/09 - 2013/06</p>
-            </div>
-        </section>
-
-        <section class="experience section">
-            <h2>Work Experience</h2>
-            <div class="experience-item">
-                <h3>Student Assistant</h3>
-                <p>Aachen University of Applied Sciences, Jülich, Germany</p>
-                <p>2023/03 - 2024/08</p>
-                <ul>
-                    <li>Provided comprehensive academic and administrative support, including conducting literature reviews, data analysis, and organizing workshops.</li>
-                    <li>Fostered a collaborative and supportive learning environment for fellow students.</li>
-                    <li>Organized the international conference on nuclear graphite specialist meeting from September 10th to 14th.</li>
-                </ul>
-            </div>
-            <div class="experience-item">
-                <h3>Teaching Assistant and Lab Engineer</h3>
-                <p>Alexandria University, Alexandria, Egypt</p>
-                <p>2013/09 - 2015/06</p>
-                <ul>
-                    <li>Developed laboratory performance assessment checklists, experiment manuals, safety guides, and lab conduct guidelines.</li>
-                    <li>Lab Tutoring: NE 111 — Modern Physics Lab, NE 112 — Computer and Numerical Methods Lab, NE 211 — Nuclear Physics Lab, NE 341 — Detection and Measurements Lab.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="training section">
-            <h2>Training and Internships</h2>
-            <div class="training-item">
-                <h3>Intern</h3>
-                <p>SCK•CEN Nuclear Research Center, Mol, Belgium</p>
-                <p>2024/03 - 2024/07</p>
-                <ul>
-                    <li>Development of Geopolymer Utilizing Slags combined with Metakaolin.</li>
-                    <li>Casted the geopolymer and tested the fresh properties: Viscosity, Mini-slump, Setting time, and Isothermal calorimeter.</li>
-                    <li>Applied characterization techniques: XRD, FTIR, TGA, SEM, BET Water Permeability measurement, and Water Accessible Porosity assessment.</li>
-                </ul>
-            </div>
-            <div class="training-item">
-                <h3>Participant</h3>
-                <p>International Atomic Energy Agency, Vienna, Austria</p>
-                <p>2023/11</p>
-                <ul>
-                    <li>International Conference on the Safety of Radioactive Waste Management, Decommissioning, Environmental Protection, and Remediation.</li>
-                </ul>
-            </div>
-            <!-- Add more training and internship experiences here as needed -->
-        </section>
-
-        <section class="skills section">
-            <h2>Programming Skills</h2>
-            <ul>
-                <li>Python</li>
-                <li>MCNP</li>
-                <li>FORTRAN</li>
-                <li>MATLAB</li>
-                <li>PLC & SCADA</li>
-            </ul>
-        </section>
-
-        <section class="volunteering section">
-            <h2>Volunteering Work</h2>
-            <div class="volunteering-item">
-                <h3>Presenter and Events Organizer</h3>
-                <p>Department of Environmental Special Studies, Bibliotheca of Alexandria, Egypt</p>
-                <p>2009/09 - 2015/09</p>
-                <ul>
-                    <li>Organizer of The National Science Festivity and The BIOVISION International Conference.</li>
-                    <li>Presenter for the League of Young Masters in Environment and Sustainable Development program.</li>
-                </ul>
-            </div>
-            <div class="volunteering-item">
-                <h3>Active Member</h3>
-                <p>Resala Charity Organization, Alexandria, Egypt</p>
-                <p>2007/09 - 2014/09</p>
-                <ul>
-                    <li>Active member in Big Siblings, Free Tutoring, and Literacy Programs.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="languages section">
-            <h2>Languages</h2>
-            <ul>
-                <li>Arabic: Native</li>
-                <li>English: Fluent</li>
-                <li>German: Intermediate</li>
-            </ul>
-        </section>
-
-        <section class="publications section">
-            <h2>Ongoing Publication</h2>
-            <p>Working on a research paper focused on the synthesis of geopolymers as barrier materials utilizing induction melting slag and metakaolin.</p>
-        </section>
-
-        <section class="awards section">
-            <h2>Grants and Awards</h2>
-            <div class="award-item">
-                <h3>Partial Scholarship for Internationalization Project</h3>
-                <p>Aachen University of Applied Sciences, Aachen, Germany</p>
-                <p>2023/09 - 2024/02</p>
-            </div>
-            <div class="award-item">
-                <h3>Award of Prof. El-Maghrabi for Excellence in Research</h3>
-                <p>Alexandria University, Egypt</p>
-                <p>2011/01</p>
-            </div>
-        </section>
-
-        <section class="memberships section">
-            <h2>Memberships</h2>
-            <p>Member of Egyptian Engineering Syndicates for Professional Engineers since 2013/09.</p>
-        </section>
-
-        <section class="references section">
-            <h2>References</h2>
-            <p>Available Upon Request</p>
-        </section>
+        </div>
     </div>
-
-    <div class="atom-model">
-        <div class="nucleus" id="nucleus"></div>
-    </div>
-
     <script>
-        // Create stars
-        function createStars() {
-            const scene = document.getElementById('scene');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = `${Math.random() * 1 + 0.5}px`;
-                star.style.height = star.style.width;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                scene.appendChild(star);
-            }
-        }
-
-        // Parallax effect for pyramids and ground
-        function updateScenePositions() {
-            const scrollY = window.scrollY;
-            const pyramid1 = document.getElementById('pyramid1');
-            const pyramid2 = document.getElementById('pyramid2');
-            const pyramid3 = document.getElementById('pyramid3');
-            const ground = document.querySelector('.ground');
-
-            pyramid1.style.transform = `translate(-50%, ${scrollY * 0.05}px)`;
-            pyramid2.style.transform = `translate(-50%, ${scrollY * 0.1}px)`;
-            pyramid3.style.transform = `translate(-50%, ${scrollY * 0.15}px)`;
-            ground.style.transform = `translateY(${scrollY * 0.2}px)`;
-        }
-
-        window.addEventListener('scroll', updateScenePositions);
-        window.addEventListener('resize', updateScenePositions);
-
-        // Typing animation
-        const typedTextSpan = document.querySelector(".typed-text");
-        const textArray = ["Nuclear Applications Researcher", "Geopolymer Specialist"];
-        const typingDelay = 200;
-        const erasingDelay = 100;
-        const newTextDelay = 2000;
-        let textArrayIndex = 0;
-        let charIndex = 0;
-
-        function type() {
-            if (charIndex < textArray[textArrayIndex].length) {
-                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
-                charIndex++;
-                setTimeout(type, typingDelay);
-            } else {
-                setTimeout(erase, newTextDelay);
-            }
-        }
-
-        function erase() {
-            if (charIndex > 0) {
-                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(erase, erasingDelay);
-            } else {
-                textArrayIndex++;
-                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
-                setTimeout(type, typingDelay + 1100);
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            createStars();
-            setTimeout(type, newTextDelay + 250);
-            updateScenePositions();
-            createAtomModel(); // Initialize the Atom Model
-        });
-
-        function createAtomModel() {
-            const nucleus = document.getElementById('nucleus');
-            const atomModel = document.querySelector('.atom-model');
-
-            // Create protons
-            for (let i = 0; i < 30; i++) {
-                const proton = document.createElement('div');
-                proton.className = 'proton';
-                proton.style.top = `${40 + (Math.random() * 20 - 10)}px`;
-                proton.style.left = `${40 + (Math.random() * 20 - 10)}px`;
-
-                const randomAnimationName = `shake${i}`;
-                createShakeAnimation(proton, randomAnimationName);
-                proton.style.animation = `${randomAnimationName} ${Math.random() + 0.5}s infinite ease-in-out`;
-                
-                nucleus.appendChild(proton);
-            }
-
-            // Create electrons
-            for (let i = 0; i < 20; i++) {
-                const electron = document.createElement('div');
-                electron.className = 'electron';
-                const orbitRadius = 60 + i * 10;
-                electron.style.setProperty('--orbit-radius', orbitRadius + 'px');
-                electron.style.animation = `orbit ${2 + Math.random() * 3}s linear infinite`;
-                atomModel.appendChild(electron);
-
-                electron.style.position = 'absolute';
-                electron.style.top = '50%';
-                electron.style.left = '50%';
-                electron.style.transform = `rotate(${Math.random() * 360}deg) translateX(${orbitRadius}px)`;
-                electron.style.transformOrigin = `0px 0px`;
-            }
-        }
-
-        function createShakeAnimation(element, name) {
-            const keyframes = `
-                @keyframes ${name} {
-                    0% { transform: translate(0, 0); }
-                    25% { transform: translate(${randomDisplacement()}px, ${randomDisplacement()}px); }
-                    50% { transform: translate(${randomDisplacement()}px, ${randomDisplacement()}px); }
-                    75% { transform: translate(${randomDisplacement()}px, ${randomDisplacement()}px); }
-                    100% { transform: translate(0, 0); }
-                }
-            `;
-            const styleSheet = document.createElement("style");
-            styleSheet.type = "text/css";
-            styleSheet.innerText = keyframes;
-            document.head.appendChild(styleSheet);
-        }
-
-        function randomDisplacement() {
-            return Math.random() * 4 - 2;
-        }
+        function createStars() {const scene = document.getElementById('scene');for (let i = 0; i < 100; i++) {const star = document.createElement('div');star.className = 'star';star.style.width = `${Math.random() * 1 + 0.5}px`;star.style.height = star.style.width;star.style.left = `${Math.random() * 100}%`;star.style.top = `${Math.random() * 100}%`;star.style.animationDelay = `${Math.random() * 3}s`;scene.appendChild(star);}}
+        function updateScenePositions() {const scrollY = window.scrollY;const pyramid1 = document.getElementById('pyramid1');const pyramid2 = document.getElementById('pyramid2');const pyramid3 = document.getElementById('pyramid3');const ground = document.querySelector('.ground');pyramid1.style.transform = `translate(-50%, ${scrollY * 0.05}px)`;pyramid2.style.transform = `translate(-50%, ${scrollY * 0.1}px)`;pyramid3.style.transform = `translate(-50%, ${scrollY * 0.15}px)`;ground.style.transform = `translateY(${scrollY * 0.2}px)`;}
+        window.addEventListener('scroll', updateScenePositions);window.addEventListener('resize', updateScenePositions);
+        const typedTextSpan = document.querySelector(".typed-text");const textArray = ["Nuclear Applications Researcher", "Geopolymer Specialist"];const typingDelay = 200;const erasingDelay = 100;const newTextDelay = 2000;let textArrayIndex = 0;let charIndex = 0;
+        function type() {if (charIndex < textArray[textArrayIndex].length) {typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);charIndex++;setTimeout(type, typingDelay);} else {setTimeout(erase, newTextDelay);}}
+        function erase() {if (charIndex > 0) {typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);charIndex--;setTimeout(erase, erasingDelay);} else {textArrayIndex++;if (textArrayIndex >= textArray.length) textArrayIndex = 0;setTimeout(type, typingDelay + 1100);}}
+        document.addEventListener("DOMContentLoaded", function() {createStars();setTimeout(type, newTextDelay + 250);updateScenePositions();createAtomModel();});
+        function createAtomModel() {const nucleus = document.getElementById('nucleus');const atomModel = document.querySelector('.atom-model');for (let i = 0; i < 30; i++) {const proton = document.createElement('div');proton.className = 'proton';proton.style.top = `${40 + (Math.random() * 20 - 10)}px`;proton.style.left = `${40 + (Math.random() * 20 - 10)}px`;const randomAnimationName = `shake${i}`;createShakeAnimation(proton, randomAnimationName);proton.style.animation = `${randomAnimationName} ${Math.random() + 0.5}s infinite ease-in-out`;nucleus.appendChild(proton);}
+        for (let i = 0; i < 20; i++) {const electron = document.createElement('div');electron.className = 'electron';const orbitRadius = 60 + i * 10;electron.style.setProperty('--orbit-radius', orbitRadius + 'px');electron.style.animation = `orbit ${2 + Math.random() * 3}s linear infinite`;atomModel.appendChild(electron);electron.style.position = 'absolute';electron.style.top = '50%';electron.style.left = '50%';electron.style.transform = `rotate(${Math.random() * 360}deg) translateX(${orbitRadius}px)`;electron.style.transformOrigin = `0px 0px`;}}
+        function createShakeAnimation(element, name) {const keyframes = `@keyframes ${name} {0% { transform: translate(0, 0); }25% { transform: translate(${randomDisplacement()}px, ${randomDisplacement()}px); }50% { transform: translate(${randomDisplacement()}px, ${randomDisplacement()}px); }75% { transform: translate(${randomDisplacement()}px, ${randomDisplacement()}px); }100% { transform: translate(0, 0); }}`;const styleSheet = document.createElement("style");styleSheet.type = "text/css";styleSheet.innerText = keyframes;document.head.appendChild(styleSheet);}
+        function randomDisplacement() {return Math.random() * 4 - 2;}
     </script>
 </body>
 </html>
