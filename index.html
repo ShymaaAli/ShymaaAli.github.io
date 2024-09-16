@@ -28,11 +28,16 @@
         #pyramid3 {border-left: 100px solid transparent;border-right: 100px solid transparent;border-bottom: 150px solid rgba(192, 192, 192, 0.3);left: 35%;z-index: 3;}
         .ground {position: absolute;bottom: 0;left: 0;width: 100%;height: 100px;background: linear-gradient(to top, rgba(222, 184, 135, 0.3), rgba(244, 164, 96, 0.3));}
         h1, h2 {margin-bottom: 1rem;color: var(--secondary-color);}
-        .intro {height: 100vh;display: flex;flex-direction: column;justify-content: center;align-items: center;text-align: center;}
+        .intro {height: 100vh;display: flex;flex-direction: column;justify-content: center;align-items: center;text-align: center;position: relative;}
         .intro h1 {font-family: 'SUSE', sans-serif;font-size: 4rem;text-shadow: 2px 2px 4px rgba(0,0,0,0.5);}
         .intro .highlight {font-family: 'Playwrite HU', sans-serif;font-weight: 400;background: linear-gradient(270deg, #004c4c, #00ff7f, #ff1493, #1e90ff);background-size: 800% 800%;-webkit-background-clip: text;-webkit-text-fill-color: transparent;animation: gradient-animation 8s ease infinite;}
         @keyframes gradient-animation {0% {background-position: 0% 50%;}50% {background-position: 100% 50%;}100% {background-position: 0% 50%;}}
         .typed-text {font-family: 'Roboto Mono', monospace;font-size: 1.5rem;margin-top: 1rem;height: 3rem;text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
+        .scroll-indicator {position: absolute;bottom: 80px;left: 50%;transform: translateX(-50%);display: flex;flex-direction: column;align-items: center;gap: 5px;z-index: 10;}
+        .arrow {width: 0;height: 0;border-left: 10px solid transparent;border-right: 10px solid transparent;border-top: 15px solid var(--secondary-color);animation: arrow-bounce 1.5s ease-in-out infinite;}
+        .arrow:nth-child(2) {animation-delay: 0.3s;}
+        .arrow:nth-child(3) {animation-delay: 0.6s;}
+        @keyframes arrow-bounce {0%, 100% {transform: translateY(0);}50% {transform: translateY(-10px);}}
         .content {display: flex;flex-wrap: wrap;margin-top: 2rem;}
         .column {flex: 1;padding: 0 1rem;min-width: 300px;}
         .section {margin-bottom: 2rem;position: relative;}
@@ -60,36 +65,44 @@
         <section class="intro">
             <div class="atom-model"><div class="nucleus" id="nucleus"></div></div>
             <h1>I am <span class="highlight">Shymaa</span></h1>
-            <div class="typed-text" id="typed-text"></div>
+            <div class="scroll-indicator">
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+                <div class="arrow"></div>
+            </div>
         </section>
         <div class="content">
             <div class="column">
-                <section class="profile section glassmorphism"><h2>Profile</h2><p>M.Sc. Candidate in Nuclear Application at Aachen University of Applied Sciences</p><p>Student Assistant at Aachen University of Applied Sciences, Department of Chemistry & Biotechnology</p></section>
+                <section class="profile section glassmorphism"><h2>Profile</h2><p><strong style="font-family: 'Playwrite HU', sans-serif;">Shymaa Ali Fathi Ali</strong> is a dedicated M.Sc. candidate in Nuclear Applications at Aachen University of Applied Sciences, specializing in the use of geopolymers in nuclear waste management. With a strong background in Nuclear and Radiation Engineering and hands-on experience in both academic and research environments, Shymaa has contributed significantly to the fields of nuclear safety, radiation protection, and material science. She has demonstrated her expertise through various internships, training programs, and academic roles, particularly in synthesizing and characterizing geopolymers. Shymaa is also active in volunteering and community service, organizing scientific events, and supporting educational programs. She aspires to advance her career in nuclear engineering, focusing on innovative solutions for sustainable development and environmental protection.</p></section>
                 <section class="education section glassmorphism"><h2>Education</h2>
-                    <div class="item"><h3>M.Sc. Candidate</h3><p>Aachen University of Applied Sciences, Jülich, Germany</p><p>Nuclear Applications</p><p>GPA: 3.4 (German Grade: 1.9)</p><p>2022/03 - present</p></div>
-                    <div class="item"><h3>Specialized Diploma in Nuclear Power Plants</h3><p>Alexandria University, Alexandria, Egypt</p><p>GPA: 3.45</p><p>2013/09 - 2015/06</p></div>
-                    <div class="item"><h3>B.S. in Nuclear and Radiation Engineering</h3><p>Alexandria University, Alexandria, Egypt</p><p>2007/09 - 2013/06</p></div>
+                    <div class="item"><h3>M.Sc. Candidate</h3><p>Aachen University of Applied Sciences, Jülich, Germany</p><p>Nuclear Applications</p><p>Specialization: Geopolymers Applications in Nuclear Waste Management</p><p>GPA: 3.4 (German Grade: 1.9)</p></div>
+                    <div class="item"><h3>Specialized Diploma in Nuclear Power Plants</h3><p>Alexandria University, Alexandria, Egypt</p><p>Graduation Project: Literature Review on the Lithium Blanket for Fusion Reactors</p><p>GPA: 3.45</p></div>
+                    <div class="item"><h3>B.S. in Nuclear and Radiation Engineering</h3><p>Alexandria University, Alexandria, Egypt</p><p>Graduation Project: Supervision and Control of the PZR using SCADA and PLC</p><p>Mini Project: Environmental Impact Assessment for Nuclear Power Plants</p></div>
                 </section>
                 <section class="experience section glassmorphism"><h2>Work Experience</h2>
-                    <div class="item"><h3>Student Assistant</h3><p>Aachen University of Applied Sciences, Jülich, Germany</p><p>2023/03 - 2024/08</p><ul><li>Provided comprehensive academic and administrative support</li><li>Fostered a collaborative learning environment</li><li>Organized international conference on nuclear graphite</li></ul></div>
-                    <div class="item"><h3>Teaching Assistant and Lab Engineer</h3><p>Alexandria University, Alexandria, Egypt</p><p>2013/09 - 2015/06</p><ul><li>Developed laboratory assessment checklists and manuals</li><li>Tutored various Nuclear Engineering lab courses</li></ul></div>
+                    <div class="item"><h3>Student Assistant</h3><p>Aachen University of Applied Sciences, Jülich, Germany</p><p>2023/03 - 2024/08</p><ul><li>Provided comprehensive academic and administrative support</li><li>Fostered a collaborative learning environment</li><li>Organized international conference on nuclear graphite specialist meeting</li></ul></div>
+                    <div class="item"><h3>Teaching Assistant and Lab Engineer</h3><p>Alexandria University, Alexandria, Egypt</p><p>2013/09 - 2015/06</p><ul><li>Developed laboratory performance assessment checklists, experiment manuals, and safety guides</li><li>Lab Tutoring: Modern Physics Lab, Computer and Numerical Methods Lab, Nuclear Physics Lab, Detection and Measurements Lab</li></ul></div>
+                </section>
+                <section class="training section glassmorphism"><h2>Training and Internships</h2>
+                    <div class="item"><h3>Intern</h3><p>SCK•CEN Nuclear Research Center, Mol, Belgium</p><p>2024/03 - 2024/07</p><p>Development of Geopolymer Utilizing Slags Combined with Metakaolin</p></div>
+                    <div class="item"><h3>Participant</h3><p>International Atomic Energy Agency, Vienna, Austria</p><p>2023/11</p><p>International Conference on the Safety of Radioactive Waste Management</p></div>
                 </section>
             </div>
             <div class="column">
-                <section class="skills section glassmorphism"><h2>Programming Skills</h2><ul><li>Python</li><li>MCNP</li><li>FORTRAN</li><li>MATLAB</li><li>PLC & SCADA</li></ul></section>
-                <section class="languages section glassmorphism"><h2>Languages</h2><ul><li>Arabic: Native</li><li>English: Fluent</li><li>German: Intermediate</li></ul></section>
-                <section class="training section glassmorphism"><h2>Training and Internships</h2>
-                    <div class="item"><h3>Intern</h3><p>SCK•CEN Nuclear Research Center, Mol, Belgium</p><p>2024/03 - 2024/07</p></div>
-                    <div class="item"><h3>Participant</h3><p>International Atomic Energy Agency, Vienna, Austria</p><p>2023/11</p></div>
+                <section class="skills section glassmorphism"><h2>Programming Skills</h2><ul><li>MCNP</li><li>FORTRAN</li><li>MATLAB</li><li>PLC & SCADA</li></ul></section>
+                <section class="languages section glassmorphism"><h2>Languages</h2><ul><li>Arabic: Native</li><li>English: Fluent</li></ul></section>
+				<section class="volunteering section glassmorphism"><h2>Volunteering Work</h2>
+                    <div class="item"><h3>Presenter and Events Organizer</h3><p>Bibliotheca of Alexandria, Egypt</p><p>2009/09 - 2015/09</p><p>Organizer of The National Science Festivity, The BIOVISION International Conference</p></div>
+                    <div class="item"><h3>Active Member</h3><p>Resala Charity Organization, Alexandria, Egypt</p><p>2007/09 - 2014/09</p><p>Active member in Big Siblings, Free Tutoring, Literacy Programs</p></div>
                 </section>
-                <section class="volunteering section glassmorphism"><h2>Volunteering Work</h2>
-                    <div class="item"><h3>Presenter and Events Organizer</h3><p>Bibliotheca of Alexandria, Egypt</p><p>2009/09 - 2015/09</p></div>
-                    <div class="item"><h3>Active Member</h3><p>Resala Charity Organization, Alexandria, Egypt</p><p>2007/09 - 2014/09</p></div>
-                </section>
-                <section class="publications section glassmorphism"><h2>Ongoing Publication</h2><p>Research paper on synthesis of geopolymers as barrier materials</p></section>
+                <section class="publications section glassmorphism"><h2>Ongoing Publication</h2><p>Research paper focused on the synthesis of a geopolymer from iron-rich slag</p></section>
                 <section class="awards section glassmorphism"><h2>Grants and Awards</h2>
                     <div class="item"><h3>Partial Scholarship for Internationalization Project</h3><p>Aachen University of Applied Sciences, Germany</p><p>2023/09 - 2024/02</p></div>
                     <div class="item"><h3>Award of Prof. El-Maghrabi for Excellence in Research</h3><p>Alexandria University, Egypt</p><p>2011/01</p></div>
+                </section>
+                <section class="volunteering section glassmorphism"><h2>Volunteering Work</h2>
+                    <div class="item"><h3>Presenter and Events Organizer</h3><p>Bibliotheca of Alexandria, Egypt</p><p>2009/09 - 2015/09</p><p>Organizer of The National Science Festivity, The BIOVISION International Conference</p></div>
+                    <div class="item"><h3>Active Member</h3><p>Resala Charity Organization, Alexandria, Egypt</p><p>2007/09 - 2014/09</p><p>Active member in Big Siblings, Free Tutoring, Literacy Programs</p></div>
                 </section>
             </div>
         </div>
