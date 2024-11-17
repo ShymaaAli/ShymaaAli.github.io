@@ -1,197 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Keeping the same head section with styles -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shymaa Ali Fathi Ali - Interactive CV</title>
-    <!-- ... (keeping all the same styles from original) ... -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'SUSE';
+            src: url('https://assets.suse.com/fonts/SUSESans.woff2') format('woff2'),
+                 url('https://assets.suse.com/fonts/SUSESans.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        :root {
+            --primary-color: #0a0a2a;
+            --secondary-color: #ffffff;
+            --accent-color: #ffffff;
+            --text-color: #f5f5f7;
+            --background-color: #0a0a2a;
+            --petroleum-green: #004c4c;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: popup 0.5s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .glassmorphism:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 10px 2px rgba(0, 76, 76, 0.3);
+            background-color: rgba(0, 76, 76, 0.15);
+        }
+        .section h2 {
+            transition: color 0.3s ease;
+        }
+        .glassmorphism:hover h2 {
+            color: var(--petroleum-green);
+        }
+        .section h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -0.5rem;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            transition: background-color 0.3s ease;
+        }
+        .glassmorphism:hover h2::after {
+            background-color: var(--petroleum-green);
+        }
+        @keyframes popup {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        .scene {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            opacity: 0.5;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.2; }
+        }
+        .intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .intro h1 {
+            font-family: 'SUSE', sans-serif;
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .intro .highlight {
+            font-family: 'Playwrite HU', sans-serif;
+            font-weight: 400;
+            background: linear-gradient(270deg, #004c4c, #00ff7f, #ff1493, #1e90ff);
+            background-size: 800% 800%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 8s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .typed-text {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            height: 3rem;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--secondary-color);
+            animation: arrow-bounce 1.5s ease-in-out infinite;
+        }
+        @keyframes arrow-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .section {
+            flex: 1 1 100%;
+            position: relative;
+        }
+        .item {
+            margin-bottom: 1.5rem;
+        }
+        .item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        ul li::before {
+            content: '•';
+            color: var(--accent-color);
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .intro h1 { font-size: 3rem; }
+            .typed-text { font-size: 1.2rem; }
+        }
+        .contact-info {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover {
+            color: var(--petroleum-green);
+        }
+    </style>
 </head>
 <body>
-    <div class="scene" id="scene">
-        <div class="pyramid" id="pyramid2"></div>
-        <div class="pyramid" id="pyramid1"></div>
-        <div class="pyramid" id="pyramid3"></div>
-        <div class="ground"></div>
-    </div>
+    <div class="scene" id="scene"></div>
     <div class="container">
         <section class="intro">
-            <div class="atom-model"><div class="nucleus" id="nucleus"></div></div>
-            <h1>I am <span class="highlight">Shymaa</span></h1>
+            <h1>I am <span class="highlight">Shymaa Ali</span></h1>
             <div class="typed-text"></div>
+            <div class="contact-info">
+                <a href="mailto:shymaa.ali.official@gmail.com">shymaa.ali.official@gmail.com</a>
+                <a href="mailto:shymaa.ali@alumni.fh-aachen.de">shymaa.ali@alumni.fh-aachen.de</a>
+                <a href="https://www.linkedin.com/in/shymaa-ali-1641b582/" target="_blank">LinkedIn Profile</a>
+            </div>
             <div class="scroll-indicator">
                 <div class="arrow"></div>
                 <div class="arrow"></div>
                 <div class="arrow"></div>
             </div>
         </section>
+
         <div class="content">
-            <div class="column">
-                <section class="contact section glassmorphism">
-                    <h2>Contact</h2>
-                    <p>Email: shymaa.ali.official@gmail.com</p>
-                    <p>Academic Email: shymaa.ali@alumni.fh-aachen.de</p>
-                    <p>LinkedIn: <a href="https://www.linkedin.com/in/shymaa-ali-1641b582/">Profile</a></p>
-                </section>
-                
-                <section class="profile section glassmorphism">
-                    <h2>Profile</h2>
-                    <p>Nuclear engineer with a Master's in Nuclear Applications from Aachen University of Applied Sciences, specializing in nuclear technology. Experienced in geopolymer synthesis and characterization, with a strong background in research and teaching. Currently seeking opportunities to expand expertise in materials development for nuclear applications, with a focus on enhancing the performance and sustainability of materials used in nuclear systems and waste management.</p>
-                </section>
+            <section class="bio section glassmorphism">
+                <h2>Bio</h2>
+                <p>Nuclear engineer with a Master's in Nuclear Applications from Aachen University of Applied Sciences, specializing in nuclear technology. Experienced in geopolymer synthesis and characterization, with a strong background in research and teaching. Currently seeking opportunities to expand my expertise in materials development for nuclear applications, with a focus on enhancing the performance and sustainability of materials used in nuclear systems and waste management.</p>
+            </section>
 
-                <section class="education section glassmorphism">
-                    <h2>Education</h2>
-                    <div class="item">
-                        <h3>M.Sc. in Nuclear Applications</h3>
-                        <p>Aachen University of Applied Sciences, Germany</p>
-                        <p>2022/03 - 2024/09</p>
-                        <p>Thesis: Assessment of the Potential of Metallurgical Iron-Rich Slag for the Development of Alkali-Activated Materials</p>
-                        <p>Mini Project: Literature Review on Geopolymers</p>
-                        <p>Grade: 88% (1.64 in German grading system)</p>
-                    </div>
-                    <div class="item">
-                        <h3>Specialized Diploma in Nuclear Power Plants</h3>
-                        <p>Alexandria University, Egypt</p>
-                        <p>2013/09 - 2015/06</p>
-                        <p>Graduation Project: Literature Review on the Lithium Blanket for Fusion Reactors</p>
-                        <p>Grade: 83.34% (GPA: 3.48/4)</p>
-                    </div>
-                    <div class="item">
-                        <h3>B.Sc. in Nuclear and Radiation Engineering</h3>
-                        <p>Alexandria University, Egypt</p>
-                        <p>2007/09 - 2013/06</p>
-                        <p>Thesis: Supervision and Control of the PZR using SCADA and PLC</p>
-                        <p>Mini Project: Environmental Impact Assessment for Nuclear Power Plants</p>
-                        <p>Grade: 61%</p>
-                    </div>
-                </section>
-
-                <section class="experience section glassmorphism">
-                    <h2>Work Experience</h2>
-                    <div class="item">
-                        <h3>Research Assistant</h3>
-                        <p>Aachen University of Applied Sciences, Germany</p>
-                        <p>2023/03 - 2024/08</p>
-                        <ul>
-                            <li>Provided comprehensive academic and administrative support</li>
-                            <li>Conducted literature reviews and performed data analysis on radioecology and geopolymer</li>
-                            <li>Led workshops to promote knowledge exchange</li>
-                            <li>Coordinated the international Nuclear Graphite Specialist Meeting (2023/09)</li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <h3>Teaching Assistant and Lab Engineer</h3>
-                        <p>Alexandria University, Egypt</p>
-                        <p>2013/09 - 2015/06</p>
-                        <ul>
-                            <li>Developed and implemented laboratory performance assessment checklists</li>
-                            <li>Authored comprehensive experiment manuals and safety guides</li>
-                            <li>Facilitated laboratory sessions for multiple undergraduate courses</li>
-                            <li>Designed and executed hands-on experiments</li>
-                            <li>Provided one-on-one guidance to students</li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-            <div class="column">
-                <section class="internships section glassmorphism">
-                    <h2>Internships and Training</h2>
-                    <div class="item">
-                        <h3>The Belgian Nuclear Research Center (SCK CEN)</h3>
-                        <p>2024/03 - 2024/07</p>
-                        <ul>
-                            <li>Developed geopolymers using blast furnace slag</li>
-                            <li>Investigated fresh properties including workability, viscosity, setting time, and heat release</li>
-                            <li>Applied characterization techniques including XRF, XRD, FTIR, TGA, SEM, BET, WAP, and WP</li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <h3>The Belgian Nuclear Research Center (SCK CEN)</h3>
-                        <p>2019/01 - 2019/08</p>
-                        <ul>
-                            <li>Developed a lookup table for dose coefficients in interventional radiology</li>
-                            <li>Tested person tracking systems for real-time dosimetry</li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <h3>Other Training</h3>
-                        <ul>
-                            <li>Egyptian Atomic Energy Authority (2013/01 - 2013/03)</li>
-                            <li>Innovative System Software USA (2017/02) - RELAP5 and SCDAP software</li>
-                            <li>Egyptian Ministry of Trade and Industry (2012/01 - 2012/03) - PLC training</li>
-                            <li>Egyptian Nuclear Materials Authority (2011/07) - Nuclear materials analysis</li>
-                            <li>Alexandria University (2010/06 - 2010/08) - MATLAB, PLCs, technical writing</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section class="scientific-output section glassmorphism">
-                    <h2>Scientific Output</h2>
+            <section class="education section glassmorphism">
+                <h2>Education</h2>
+                <div class="item">
+                    <h3>M.Sc. in Nuclear Applications</h3>
+                    <p>Aachen University of Applied Sciences in Germany</p>
+                    <p>2022/03 -- 2024/09</p>
                     <ul>
-                        <li>Submitting journal paper on iron-rich slag-based alkali-activated materials</li>
-                        <li>IAEA's International Conference on Radioactive Waste Management (2023/11), Austria</li>
-                        <li>JRC's 8th Summer School on Nuclear Decommissioning (2016/09), Italy</li>
-                        <li>IEEE Nuclear and Plasma Sciences Society Summer Schools (2013/09), Egypt</li>
+                        <li>Thesis: Assessment of the Potential of Metallurgical Iron-Rich Slag for the Development of Alkali-Activated Materials</li>
+                        <li>Mini Project: Literature Review on Geopolymers</li>
+                        <li>Grade: 88% (1.64 in German grading system)</li>
                     </ul>
-                </section>
-
-                <section class="skills section glassmorphism">
-                    <h2>Technical Skills</h2>
+                </div>
+                <div class="item">
+                    <h3>Specialized Diploma in Nuclear Power Plants</h3>
+                    <p>Alexandria University in Egypt</p>
+                    <p>2013/09 -- 2015/06</p>
                     <ul>
-                        <li>Simulation: MCNP, PLC, SCADA</li>
-                        <li>Programming: Python, FORTRAN, MATLAB</li>
+                        <li>Graduation Project: Literature Review on the Lithium Blanket for Fusion Reactors</li>
+                        <li>Grade: 83.34% (GPA: 3.48/4)</li>
                     </ul>
-                </section>
-
-                <section class="languages section glassmorphism">
-                    <h2>Languages</h2>
+                </div>
+                <div class="item">
+                    <h3>B.Sc. in Nuclear and Radiation Engineering</h3>
+                    <p>Alexandria University in Egypt</p>
+                    <p>2007/09 -- 2013/06</p>
                     <ul>
-                        <li>Arabic: Native</li>
-                        <li>English: Fluent (IELTS: 6)</li>
-                        <li>German: Beginner</li>
+                        <li>Thesis: Supervision and Control of the PZR using SCADA and PLC</li>
+                        <li>Mini Project: Environmental Impact Assessment for Nuclear Power Plants</li>
+                        <li>Grade: 61%</li>
                     </ul>
-                </section>
+                </div>
+            </section>
 
-                <section class="awards section glassmorphism">
-                    <h2>Grants and Awards</h2>
-                    <div class="item">
-                        <h3>Partial Scholarship</h3>
-                        <p>Department of International Affairs, Aachen University of Applied Sciences</p>
-                        <p>2023/09 - 2024/02</p>
-                    </div>
-                    <div class="item">
-                        <h3>Award of Prof. El-Maghrabi for Excellence in Research</h3>
-                        <p>Alexandria University, Egypt</p>
-                        <p>2011/01</p>
-                    </div>
-                </section>
+            <section class="work-experience section glassmorphism">
+                <h2>Work Experience</h2>
+                <div class="item">
+                    <h3>Research Assistant</h3>
+                    <p>Aachen University of Applied Sciences in Germany</p>
+                    <p>2023/03 -- 2024/08</p>
+                    <ul>
+                        <li>Provided comprehensive academic and administrative support</li>
+                        <li>Conducted literature reviews and performed data analysis on radioecology and geopolymer</li>
+                        <li>Led workshops to promote knowledge exchange and cultivate a collaborative learning environment</li>
+                        <li>Coordinated the international Nuclear Graphite Specialist Meeting (2023/09)</li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <h3>Teaching Assistant and Lab Engineer</h3>
+                    <p>Alexandria University in Egypt</p>
+                    <p>2013/09 -- 2015/06</p>
+                    <ul>
+                        <li>Developed and implemented laboratory performance assessment checklists</li>
+                        <li>Authored comprehensive experiment manuals and safety guides</li>
+                        <li>Facilitated laboratory sessions for multiple undergraduate courses</li>
+                        <li>Designed and executed hands-on experiments to reinforce theoretical concepts</li>
+                        <li>Provided one-on-one guidance to students in nuclear engineering principles</li>
+                    </ul>
+                </div>
+            </section>
 
-                <section class="volunteering section glassmorphism">
-                    <h2>Volunteering Work</h2>
-                    <div class="item">
-                        <h3>Department of Environmental Special Studies</h3>
-                        <p>Bibliotheca of Alexandria, Egypt</p>
-                        <p>2009/09 - 2015/09</p>
-                        <ul>
-                            <li>Presenter in the League of Young Masters (LYM)</li>
-                            <li>Organizer of The National Science Festivity</li>
-                            <li>Organizer in The BIOVISION International Conference</li>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <h3>Resala Charity Organization</h3>
-                        <p>2007/09 - 2014/09</p>
-                        <ul>
-                            <li>Active member in Big Siblings, Free Tutoring, and Literacy Programs</li>
-                        </ul>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-    <!-- Keeping the same scripts section -->
-    <script>
-        // ... (keeping all the same scripts from original) ...
-    </script>
-</body>
-</html>
+            <section class="internships section glassmorphism">
+                <h2>Internships and Training</h2>
+                <div class="item">
+                    <h3>The Belgian Nuclear Research Center (SCK CEN)</h3>
+                    <p>2024/03 -- 2024/07</p>
+                    <ul>
+                        <li>Developed geopolymers using blast furnace slag</li>
+                        <li>Investigated fresh properties including workability, viscosity, setting time, and heat release</li>
+                        <li>Applied characterization techniques including XRF, XRD, FTIR, TGA, SEM, BET, WAP, and WP</li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <h3>The Belgian Nuclear Research Center (SCK CEN)</h3>
+                    <p>2019/01 -- 2019/08</p>
+                    <ul>
+                        <li>Developed a lookup table for dose coefficients in interventional radiology</li>
+                        <li>Tested person tracking systems for real-time dosimetry</li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <h3>Additional Training Experience</h3>
+                    <ul>
+                        <li>Egyptian Atomic Energy Authority (2013/01 -- 2013/03): Training on 2nd Research Reactor and uranium ore mining</li>
+                        <li>Innovative System Software USA (2017/02): Project-based training on RELAP5 and SCDAP software</li>
+                        <li>Egyptian Ministry of Trade and Industry (2012/01 -- 2012/03): Training on PLC and S7-300</li>
+                        <li>Egyptian Nuclear Materials Authority (2011/07): Analysis of nuclear materials using XRF</li>
+                        <li>Nuclear & Radiation Engineering at Alexandria University (2010/06 -- 2010/08): Training on MATLAB, PLCs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="scientific-output section glassmorphism">
+                <h2>Scientific Output</h2>
+                <ul>
+                    <li>Submitting a journal paper on the characterization and performance of iron-rich slag-based alkali-activated materials</li>
+                    <li>Participated in IAEA's International Conference on Safety of Radioactive Waste Management (2023/11)</li>
+                    <li>Participated in JRC's 8th Summer School on Nuclear Decommissioning and Waste Management (2016/09)</li>
+                    <li>Participated in IEEE Nuclear and Plasma Sciences Society Summer Schools (2013/09)</li>
+                </ul>
+            </section>
+
+            <section class="volunteering section glassmorphism">
+                <h2>Volunteering Work</h2>
+                <div class="item">
+                    <h3>Department of Environmental Special Studies, Bibliotheca
